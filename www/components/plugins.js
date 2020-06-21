@@ -27,12 +27,22 @@ $(document).on("click","#vibrar",function(){
   navigator.vibrate(1500);
 });
 
+function mostraMapa(lat, long){
+ L.mapquest.key = 'lCznJUbBdtKLoGMf5bXFCbarydAfyG2S';
+
+        var map = L.mapquest.map('map', {
+          center: [lat, long],
+          layers: L.mapquest.tileLayer('map'),
+          zoom: 16
+        });
+
+        map.addControl(L.mapquest.control());
+}
+
 $(document).on("click","#local",function(){
   var onSuccess = function(position) {
 //posso tirar algumas coisas e manter apenas o que me interessa para o aplicativo
-        alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n');
+        mostraMapa(position.coords.latitude, position.coords.longitude)
     };
 
  
